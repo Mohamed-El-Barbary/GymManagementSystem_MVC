@@ -10,5 +10,27 @@ namespace GymManagementDAL.Entities
     {
         // JoinDate => CreatedAt from BaseEntity
         public string? Photo { get; set; }
+
+        #region Relationships
+
+        #region Member - HealthRecord
+
+        public HealthRecord HealthRecord { get; set; } = null!;
+
+        #endregion
+
+        #region Member - Membership
+        public ICollection<Membership> Memberships { get; set; } = new HashSet<Membership>();
+
+        #endregion
+
+        #region Member - Booking
+
+        public ICollection<Booking> MemberBooking { get; set; } = null!;
+
+        #endregion
+
+        #endregion
+
     }
 }

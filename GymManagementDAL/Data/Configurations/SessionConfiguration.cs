@@ -13,12 +13,21 @@ namespace GymManagementDAL.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Session> builder)
         {
-           
+
             builder.ToTable(Tb =>
             {
                 Tb.HasCheckConstraint("CK_SessionValidEndDate", "EndDate > StartDate");
                 Tb.HasCheckConstraint("CK_SessionCapacity", "Capacity Between 1 AND 25");
             });
+
+            builder.HasOne(x => x.SessionCategory)
+                   .WithMany(x => x.Sessions)
+                   .HasForeignKey(x => x.CategoryId);
+
+
+            builder.HasOne(x => x.SessionTrainer)
+                   .WithMany(x => x.TrainerSessions)
+                   .HasForeignKey(x => x.TrainerId);
 
         }
     }

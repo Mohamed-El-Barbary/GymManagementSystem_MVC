@@ -11,5 +11,12 @@ namespace GymManagementDAL.Entities
     {
         // HireDate => CreatedAt from BaseEntity
         public Specialties Specialties { get; set; }
+
+        #region Trainer - Session
+
+        public ICollection<Session> TrainerSessions { get; set; } = null!;
+
+        #endregion
+
     }
 }
