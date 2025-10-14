@@ -26,7 +26,7 @@ namespace GymManagementDAL.Data.Configurations
 
             builder.ToTable(Tb =>
             {
-                Tb.HasCheckConstraint("CK_PlanDurationDayes", "DurationDays BETWEEN 1 AND 265");
+                Tb.HasCheckConstraint("CK_PlanDurationDayes", "DurationDays BETWEEN 1 AND 365");
 
             });
         }

@@ -14,7 +14,7 @@ namespace GymManagementDAL.Data.Configurations
         public void Configure(EntityTypeBuilder<Membership> builder)
         {
             builder.Property(x => x.CreatedAt)
-                   .HasColumnType("StartDate")
+                   .HasColumnName("StartDate")
                    .HasDefaultValueSql("GETDATE()");
 
             builder.HasKey(x => new { x.MemberId, x.PlanId });
