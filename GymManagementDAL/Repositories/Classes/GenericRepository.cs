@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace GymManagementDAL.Repositories.Classes
 {
-    public class GenericRepositories<TEntity> : IGenericRepositories<TEntity> where TEntity : BaseEntity, new()
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity, new()
     {
         private readonly GymDbContext _dbContext;
 
-        public GenericRepositories(GymDbContext dbContext)
+        public GenericRepository(GymDbContext dbContext)
         {
             _dbContext = dbContext;
         }

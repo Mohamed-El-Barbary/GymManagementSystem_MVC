@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GymManagementDAL.Repositories.Interfaces
 {
-    public interface IGenericRepositories<TEntity>
+    public interface IGenericRepository<TEntity>
     {
 
         IEnumerable<TEntity> GetAll(Func<TEntity, bool>? condition = null);
