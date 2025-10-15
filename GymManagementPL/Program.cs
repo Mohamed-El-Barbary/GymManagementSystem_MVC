@@ -1,4 +1,5 @@
 using GymManagementDAL.Data.Contexts;
+using GymManagementDAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagementPL
@@ -15,6 +16,8 @@ namespace GymManagementPL
             {
                 optoins.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            
 
             var app = builder.Build();
 
