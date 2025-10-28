@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GymManagementBLL.ViewModels.MemberViewModel;
 using GymManagementBLL.ViewModels.MemberViewModels;
+using GymManagementBLL.ViewModels.TrainerViewModels;
 using GymManagementDAL.Entities;
 using Microsoft.Extensions.Options;
 using System;
@@ -18,6 +19,7 @@ namespace GymManagementBLL
         {
             // Add your mapping configurations here
             ConfigureMemberMappings();
+            ConfigureTrainerMappings();
         }
 
         private void ConfigureMemberMappings()
@@ -66,5 +68,46 @@ namespace GymManagementBLL
 
 
         }
+
+        private void ConfigureTrainerMappings()
+        {
+
+            // Trainer -> TrainerViewModel mapping
+
+            CreateMap<Trainer, TrainerViewModel>()
+                .ForMember(dest => dest.Address, options => options.MapFrom(src => $"{src.Address.City} , {src.Address.Street} , {src.Address.BuildingNumber}"))
+                .ForMember(dest => dest.DateOfBirth, options => options.MapFrom(src => src.DateOfBirth.ToString()));
+
+            // CreateTrainerViewModel -> Trainer mapping
+
+            CreateMap<CreateTrainerViewModel, Trainer>()
+                .ForMember(dest => dest.Address, options => options.MapFrom(src => new Address
+                {
+                    City = src.City,
+                    Street = src.Street,
+                    BuildingNumber = src.BuildingNumber
+                }));
+
+            // Trainer -> TrainerToUpdateViewModel mapping
+
+            CreateMap<Trainer, TrainerToUpdateViewModel>()
+                .ForMember(dest => dest.City, options => options.MapFrom(src => src.Address.City))
+                .ForMember(dest => dest.Street, options => options.MapFrom(src => src.Address.Street))
+                .ForMember(dest => dest.BuildingNumber, options => options.MapFrom(src => src.Address.BuildingNumber));
+
+            // TrainerToUpdateViewModel -> Trainer mapping
+
+            CreateMap<TrainerToUpdateViewModel, Trainer>()
+               .ForMember(dest => dest.Name, options => options.Ignore())
+               .AfterMap((src, dest) => // After mapping, update the nested Address object Not replacing it Or Change The reference
+               {
+                   dest.Address.City = src.City;
+                   dest.Address.Street = src.Street;
+                   dest.Address.BuildingNumber = src.BuildingNumber;
+                   dest.UpdatedAt = DateTime.Now;
+               });
+
+        }
+
     }
 }
