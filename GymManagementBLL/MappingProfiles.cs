@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GymManagementBLL.ViewModels.MemberViewModel;
 using GymManagementBLL.ViewModels.MemberViewModels;
+using GymManagementBLL.ViewModels.PlanViewModels;
 using GymManagementBLL.ViewModels.TrainerViewModels;
 using GymManagementDAL.Entities;
 using Microsoft.Extensions.Options;
@@ -20,6 +21,7 @@ namespace GymManagementBLL
             // Add your mapping configurations here
             ConfigureMemberMappings();
             ConfigureTrainerMappings();
+            ConfigurePlanMappings();
         }
 
         private void ConfigureMemberMappings()
@@ -106,6 +108,24 @@ namespace GymManagementBLL
                    dest.Address.BuildingNumber = src.BuildingNumber;
                    dest.UpdatedAt = DateTime.Now;
                });
+
+        }
+
+        private void ConfigurePlanMappings()
+        {
+            // Plan -> PlanViewModel mapping
+            CreateMap<Plan, PlanViewModel>();
+
+            // plan -> UpdatePlanViewModel mapping (1)
+
+            CreateMap<Plan, UpdatePlanViewModel>()
+                .ForMember(dest => dest.PlanName, options => options.MapFrom(src => src.Name));
+
+            // UpdatePlanViewModel -> plan
+
+            CreateMap<UpdatePlanViewModel, Plan>()
+                .ForMember(dest => dest.Name, options => options.Ignore())
+                .ForMember(dest => dest.UpdatedAt, options => options.MapFrom(src => DateTime.Now));
 
         }
 
