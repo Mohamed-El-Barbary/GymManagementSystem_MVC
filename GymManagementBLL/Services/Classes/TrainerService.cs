@@ -14,14 +14,24 @@ namespace GymManagementBLL.Services.Classes
     public class TrainerService : ITrainerService
     {
 
+        #region Fileds
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+
+        #endregion
+
+        #region Constructor
 
         public TrainerService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+        #endregion
+        
+        #region GetAllTrainers
 
         public IEnumerable<TrainerViewModel> GetAllTrainers()
         {
@@ -32,6 +42,10 @@ namespace GymManagementBLL.Services.Classes
             return mappedTrainers;
 
         }
+
+        #endregion
+
+        #region CreateTrainer
 
         public bool CreateTrainer(CreateTrainerViewModel createdTrainer)
         {
@@ -54,6 +68,10 @@ namespace GymManagementBLL.Services.Classes
 
         }
 
+        #endregion
+
+        #region GetTrainerDetails
+
         public TrainerViewModel? GetTrainerDetails(int trainerId)
         {
 
@@ -66,6 +84,10 @@ namespace GymManagementBLL.Services.Classes
             return mappedTrainer;
 
         }
+
+        #endregion
+
+        #region UpdateTrainer
 
         public TrainerToUpdateViewModel? TrainerToUpdateViewModel(int trainerId)
         {
@@ -103,9 +125,13 @@ namespace GymManagementBLL.Services.Classes
 
         }
 
+        #endregion
+
+        #region RemoveTrainer
+
         public bool RemoveTrainer(int trainerId)
         {
-            
+
             var repo = _unitOfWork.GetRepository<Trainer>();
             var trainer = repo.GetById(trainerId);
             if (trainer is null) return false;
@@ -126,6 +152,8 @@ namespace GymManagementBLL.Services.Classes
             }
 
         }
+
+        #endregion
 
         #region HelperMethod
 
