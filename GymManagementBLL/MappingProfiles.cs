@@ -2,6 +2,7 @@
 using GymManagementBLL.ViewModels.MemberViewModel;
 using GymManagementBLL.ViewModels.MemberViewModels;
 using GymManagementBLL.ViewModels.PlanViewModels;
+using GymManagementBLL.ViewModels.SessionViewModels;
 using GymManagementBLL.ViewModels.TrainerViewModels;
 using GymManagementDAL.Entities;
 using Microsoft.Extensions.Options;
@@ -22,6 +23,7 @@ namespace GymManagementBLL
             ConfigureMemberMappings();
             ConfigureTrainerMappings();
             ConfigurePlanMappings();
+            ConfigureSessionMappings();
         }
 
         private void ConfigureMemberMappings()
@@ -126,6 +128,24 @@ namespace GymManagementBLL
             CreateMap<UpdatePlanViewModel, Plan>()
                 .ForMember(dest => dest.Name, options => options.Ignore())
                 .ForMember(dest => dest.UpdatedAt, options => options.MapFrom(src => DateTime.Now));
+
+        }
+
+        private void ConfigureSessionMappings()
+        {
+
+            // Session - SessionViewModel
+            CreateMap<Session, SessionViewModel>()
+                .ForMember(dest => dest.TrainerName, options => options.MapFrom(src => src.SessionTrainer.Name))
+                .ForMember(dest => dest.CategoryName, options => options.MapFrom(src => src.SessionCategory.CategoryName))
+                .ForMember(dest => dest.AvailableSlots, options => options.Ignore());
+
+            // CreateSessionViewModel -> Session
+
+            CreateMap<CreateSessionViewModel, Session>();
+
+            // Session -> UpdateSessionViewModel
+            CreateMap<Session, UpdateSessionViewModel>().ReverseMap();
 
         }
 
