@@ -78,7 +78,7 @@ namespace GymManagementBLL
             // Trainer -> TrainerViewModel mapping
 
             CreateMap<Trainer, TrainerViewModel>()
-                .ForMember(dest => dest.Address, options => options.MapFrom(src => $"{src.Address.City} , {src.Address.Street} , {src.Address.BuildingNumber}"))
+                .ForMember(dest => dest.Address, options => options.MapFrom(src => $"{src.Address.BuildingNumber} , {src.Address.Street} , {src.Address.City}"))
                 .ForMember(dest => dest.DateOfBirth, options => options.MapFrom(src => src.DateOfBirth.ToString()));
 
             // CreateTrainerViewModel -> Trainer mapping

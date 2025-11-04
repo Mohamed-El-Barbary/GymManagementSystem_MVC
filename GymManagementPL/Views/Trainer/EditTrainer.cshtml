@@ -59,11 +59,27 @@
                         </div>
                         <div class="row g-3">
 
-                            <div class="col-12 col-md-6">
-                                <label asp-for="Specialties" class="form-label"></label>
-                                <select asp-for="Specialties" asp-items="Html.GetEnumSelectList<Specialties>()" class="form-select">
-                                    <option value="">-- Select Specialist --</option>
-                                </select>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">
+                                    Specializations <span class="text-danger">*</span>
+                                </label>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="Specialties" value="@Specialties.GeneralFitness" />
+                                    <label class="form-check-label">@Specialties.GeneralFitness</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="Specialties" value="@Specialties.Yoga" />
+                                    <label class="form-check-label">@Specialties.Yoga</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="Specialties" value="@Specialties.Boxing" />
+                                    <label class="form-check-label">@Specialties.Boxing</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" asp-for="Specialties" value="@Specialties.CrossFit" />
+                                    <label class="form-check-label">@Specialties.CrossFit</label>
+                                </div>
                                 <span asp-validation-for="Specialties" class="text-danger"></span>
                             </div>
                         </div>
