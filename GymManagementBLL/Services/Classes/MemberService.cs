@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using GymManagementBLL.Services.Interfaces;
-using GymManagementBLL.ViewModels.MemberViewModel;
 using GymManagementBLL.ViewModels.MemberViewModels;
 using GymManagementDAL.Entities;
 using GymManagementDAL.Repositories.Interfaces;
@@ -133,13 +132,18 @@ namespace GymManagementBLL.Services.Classes
 
         public bool UpdateMember(int id, MemberToUpdateViewModel updatedMember)
         {
+
+            var emailExist = _unitOfWork.GetRepository<Member>().GetAll(x => x.Email == updatedMember.Email && x.Id != id);
+            var phoneExist = _unitOfWork.GetRepository<Member>().GetAll(x => x.Phone == updatedMember.Phone && x.Id != id);
+
+            if (emailExist.Any() || phoneExist.Any())
+                return false;
+
             var repo = _unitOfWork.GetRepository<Member>();
 
             var existingMember = repo.GetById(id);
             if (existingMember is null) return false;
 
-            if (IsMailExist(updatedMember.Email) || IsPhoneExist(updatedMember.Phone))
-                return false;
 
             _mapper.Map(updatedMember, existingMember);
 
