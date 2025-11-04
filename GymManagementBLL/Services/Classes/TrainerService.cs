@@ -89,7 +89,7 @@ namespace GymManagementBLL.Services.Classes
 
         #region UpdateTrainer
 
-        public TrainerToUpdateViewModel? TrainerToUpdateViewModel(int trainerId)
+        public TrainerToUpdateViewModel? GetTrainerToUpdate(int trainerId)
         {
             var trainer = _unitOfWork.GetRepository<Trainer>().GetById(trainerId);
 
@@ -103,8 +103,11 @@ namespace GymManagementBLL.Services.Classes
         public bool UpdateTrainer(int trainerId, TrainerToUpdateViewModel trainerToUpdate)
         {
 
-            if (IsMailExist(trainerToUpdate.Email) || IsPhoneExist(trainerToUpdate.Phone))
-                return false;
+            var emailExist = _unitOfWork.GetRepository<Trainer>().GetAll(
+                x => x.Email == trainerToUpdate.Email && x.Id != trainerId);
+
+            var phoneExist = _unitOfWork.GetRepository<Trainer>().GetAll(
+                x => x.Phone == trainerToUpdate.Phone && x.Id != trainerId);
 
             var repo = _unitOfWork.GetRepository<Trainer>();
             var trainer = repo.GetById(trainerId);
