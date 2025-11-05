@@ -13,7 +13,7 @@ namespace GymManagementBLL.Services.Interfaces
 
         PlanViewModel? GetPlanDetails(int planId);
 
-        PlanViewModel? GetPlanToUpdate(int planId);
+        UpdatePlanViewModel? GetPlanToUpdate(int planId);
 
         bool UpdatePlan(int planId, UpdatePlanViewModel updatedPlan);
 

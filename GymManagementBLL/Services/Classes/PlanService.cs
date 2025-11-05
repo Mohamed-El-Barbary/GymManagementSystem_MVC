@@ -61,13 +61,13 @@ namespace GymManagementBLL.Services.Classes
 
         #region UpdatePLan
 
-        public PlanViewModel? GetPlanToUpdate(int planId)
+        public UpdatePlanViewModel? GetPlanToUpdate(int planId)
         {
             var plan = _unitOfWork.GetRepository<Plan>().GetById(planId);
             if (plan == null || plan.IsActive == false || HasActivateMemberships(planId))
                 return null;
 
-            return _mapper.Map<PlanViewModel>(plan);
+            return _mapper.Map<UpdatePlanViewModel>(plan);
         }
 
         public bool UpdatePlan(int planId, UpdatePlanViewModel updatedPlan)
