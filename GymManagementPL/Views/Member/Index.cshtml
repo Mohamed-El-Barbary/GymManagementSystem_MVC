@@ -26,7 +26,7 @@ else if (TempData["ErrorMessage"] != null)
         </a>
     </header>
 
-    @if (Model.Any())
+    @if (Model != null && Model.Any())
     {
         <div class="table-responsive " style="overflow: visible;">
             <table class="table table-borderless">
