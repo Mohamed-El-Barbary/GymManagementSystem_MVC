@@ -146,6 +146,10 @@ namespace GymManagementBLL
             // Session -> UpdateSessionViewModel
             CreateMap<Session, UpdateSessionViewModel>().ReverseMap();
 
+            CreateMap<Category, CategorySelectViewModel>()
+                .ForMember(dest => dest.Name, options => options.MapFrom(src => src.CategoryName));
+            CreateMap<Trainer, TrainerSelectViewModel>();
+
         }
 
     }

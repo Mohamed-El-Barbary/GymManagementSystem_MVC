@@ -166,6 +166,20 @@ namespace GymManagementBLL.Services.Classes
 
         #endregion
 
+        public IEnumerable<TrainerSelectViewModel> GetTrainersForDropDown()
+        {
+            var trainers = _unitOfWork.GetRepository<Trainer>().GetAll();
+
+            return _mapper.Map<IEnumerable<TrainerSelectViewModel>>(trainers);
+        }
+
+        public IEnumerable<CategorySelectViewModel> GetCategoriesForDropDown()
+        {
+            var Categories = _unitOfWork.GetRepository<Category>().GetAll();
+            return _mapper.Map<IEnumerable<CategorySelectViewModel>>(Categories);
+        }
+
+
         #region Helper Method
 
         private bool IsTrainerExist(int TrainerId)

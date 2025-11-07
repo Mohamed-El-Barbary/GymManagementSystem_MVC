@@ -103,11 +103,11 @@ namespace GymManagementBLL.Services.Classes
         public bool UpdateTrainer(int trainerId, TrainerToUpdateViewModel trainerToUpdate)
         {
 
-            var emailExist = _unitOfWork.GetRepository<Trainer>().GetAll(
-                x => x.Email == trainerToUpdate.Email && x.Id != trainerId);
+            var emailExist = _unitOfWork.GetRepository<Member>().GetAll(x => x.Email == trainerToUpdate.Email && x.Id != trainerId);
+            var phoneExist = _unitOfWork.GetRepository<Member>().GetAll(x => x.Phone == trainerToUpdate.Phone && x.Id != trainerId);
 
-            var phoneExist = _unitOfWork.GetRepository<Trainer>().GetAll(
-                x => x.Phone == trainerToUpdate.Phone && x.Id != trainerId);
+            if (emailExist.Any() || phoneExist.Any())
+                return false;
 
             var repo = _unitOfWork.GetRepository<Trainer>();
             var trainer = repo.GetById(trainerId);

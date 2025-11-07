@@ -39,7 +39,7 @@ namespace GymManagementDAL.Repositories.Classes
         }
         public int GetCountOfBooksSlots(int sessionId)
         {
-            return _dbContext.Bookings.Where(x => x.Id == sessionId).Count();
+            return _dbContext.Bookings.Where(x => x.SessionId == sessionId).Count();
         }
 
 
