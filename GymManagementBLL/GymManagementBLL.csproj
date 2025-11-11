@@ -10,7 +10,11 @@
     <ProjectReference Include="..\GymManagementDAL\GymManagementDAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.1.0" />
   </ItemGroup>
 
