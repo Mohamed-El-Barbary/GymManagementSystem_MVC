@@ -124,7 +124,7 @@ namespace GymManagementBLL.Services.Classes
 
 
                 _mapper.Map(updateSession, session);
-                session.UpdatedAt = DateTime.Now;
+                session!.UpdatedAt = DateTime.Now;
 
                 sessionRepo.Update(session);
 
