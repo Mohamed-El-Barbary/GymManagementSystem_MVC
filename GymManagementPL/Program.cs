@@ -4,8 +4,10 @@ using GymManagementBLL.Services.Classes;
 using GymManagementBLL.Services.Interfaces;
 using GymManagementDAL.Data.Contexts;
 using GymManagementDAL.Data.DataSeed;
+using GymManagementDAL.Entities;
 using GymManagementDAL.Repositories.Classes;
 using GymManagementDAL.Repositories.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymManagementPL
@@ -33,19 +35,20 @@ namespace GymManagementPL
             builder.Services.AddScoped<IAttachmentService, AttachmentService>();
 
             builder.Services.AddAutoMapper(x => x.AddProfile(new MappingProfiles()));
-
             
-
             var app = builder.Build();
 
             #region DataSeed
 
             using var scope = app.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<GymDbContext>();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var pendingMigrations = dbContext.Database.GetPendingMigrations();
             if (pendingMigrations?.Any() ?? false)
                 dbContext.Database.Migrate();
-            GymDataSeeding.SeedData(dbContext); 
+            GymDataSeeding.SeedData(dbContext);
+            IdentityDbContextSeeding.SeedData(roleManager, userManager);
 
             #endregion
 
