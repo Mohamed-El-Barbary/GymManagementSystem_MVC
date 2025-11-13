@@ -12,6 +12,7 @@ namespace GymManagementDAL.Repositories.Interfaces
     {
 
         public ISessionRepository SessionRepository { get; }
+        public IMembershipRepository membershipRepository { get; }
         IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : BaseEntity, new();
 
         int SaveChanges();

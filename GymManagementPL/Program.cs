@@ -18,13 +18,13 @@ namespace GymManagementPL
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            #region Add services to the container.
+            
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<GymDbContext>(optoins =>
             {
                 optoins.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ISessionRepository, SessionRepository>();
             builder.Services.AddScoped<IAnalyticsService, AnalyticsService>();
@@ -34,6 +34,8 @@ namespace GymManagementPL
             builder.Services.AddScoped<ISessionService, SessionService>();
             builder.Services.AddScoped<IAttachmentService, AttachmentService>();
             builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IMembershipRepository, MembershipRepository>();
+            builder.Services.AddScoped<IMembershipService, MembershipService>();
             builder.Services.AddAutoMapper(x => x.AddProfile(new MappingProfiles()));
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Config =>
             {
@@ -45,6 +47,8 @@ namespace GymManagementPL
             //    opt.LoginPath = "/Account/Login";
             //    opt.AccessDeniedPath = "/Account/AccessDenied";
             //});
+
+            #endregion
 
             var app = builder.Build();
 
@@ -62,7 +66,9 @@ namespace GymManagementPL
 
             #endregion
 
-            // Configure the HTTP request pipeline.
+             
+            #region Configure the HTTP request pipeline.
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -82,6 +88,8 @@ namespace GymManagementPL
                 name: "default",
                 pattern: "{controller=Account}/{action=Login}/{id?}")
                 .WithStaticAssets();
+
+            #endregion
 
             app.Run();
         }
