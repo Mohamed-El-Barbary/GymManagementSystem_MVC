@@ -1,10 +1,12 @@
 ﻿using GymManagementBLL.Services.Interfaces;
 using GymManagementBLL.ViewModels.MemberViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GymManagementPL.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
     public class MemberController : Controller
     {
 
@@ -19,7 +21,7 @@ namespace GymManagementPL.Controllers
         public MemberController(IMemberService memberService)
         {
             _memberService = memberService;
-        } 
+        }
 
         #endregion
 
@@ -183,7 +185,7 @@ namespace GymManagementPL.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-        
+
         #endregion
 
     }
