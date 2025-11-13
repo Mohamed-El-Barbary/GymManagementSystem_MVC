@@ -25,7 +25,7 @@ namespace GymManagementBLL.Services.Classes
         public IEnumerable<MembershipViewModel> GetAllMemberships()
         {
 
-            var memberships = _unitOfWork.membershipRepository.GetAllMembershipsWithMemberAndPLan(x => x.Status == "Active");
+            var memberships = _unitOfWork.MembershipRepository.GetAllMembershipsWithMemberAndPLan(x => x.Status == "Active");
             if (!memberships.Any()) return [];
             return _mapper.Map<IEnumerable<MembershipViewModel>>(memberships);
         }
@@ -38,7 +38,7 @@ namespace GymManagementBLL.Services.Classes
                                                    .GetAll(x => x.Id == createdMembership.MemberId)
                                                    .Any();
 
-                var hasActiveMembership = _unitOfWork.membershipRepository
+                var hasActiveMembership = _unitOfWork.MembershipRepository
                                                      .GetAllMembershipsWithMemberAndPLan(x => x.MemberId == createdMembership.MemberId)
                                                      .Any();
 
@@ -67,7 +67,7 @@ namespace GymManagementBLL.Services.Classes
 
         public bool DeleteMembership(int id)
         {
-            var Repo = _unitOfWork.membershipRepository;
+            var Repo = _unitOfWork.MembershipRepository;
             var ActiveMemberships = Repo.GetAll(X => X.MemberId == id && X.Status == "Active").FirstOrDefault();
             if (ActiveMemberships is null) return false;
             Repo.Delete(ActiveMemberships);

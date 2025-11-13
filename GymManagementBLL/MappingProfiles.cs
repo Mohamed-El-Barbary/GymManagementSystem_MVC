@@ -24,6 +24,7 @@ namespace GymManagementBLL
             ConfigureTrainerMappings();
             ConfigurePlanMappings();
             ConfigureSessionMappings();
+            ConfigureMembershipMappings();
         }
 
         private void ConfigureMemberMappings()
