@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<MemberViewModel>
 
+@{
+    ViewData["Title"] = "Members";
+}
+
 @if (TempData["SuccessMessage"] != null)
 {
     <div id="Alert" class="alert alert-success alert-dismissible fade show">
@@ -135,7 +139,7 @@ else if (TempData["ErrorMessage"] != null)
 @section Scripts
 {
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const alertBox = document.getElementById("Alert");
             if (alertBox) {
                 setTimeout(() => {

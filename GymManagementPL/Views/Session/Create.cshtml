@@ -1,4 +1,9 @@
 ﻿@model CreateSessionViewModel
+
+@{
+    ViewData["Title"] = "Create Session";
+}
+
 <div class="container mt-4">
     <header class="mb-4">
         <h3 class="text-primary-color">Create New Session</h3>
@@ -102,7 +107,7 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const startInput = document.querySelector('input[name="StartDate"]');
             const endInput = document.querySelector('input[name="EndDate"]');
 
@@ -127,7 +132,7 @@
                 endInput.value = localOneHourLater;
             }
 
-            startInput.addEventListener("change", function () {
+            startInput.addEventListener("change", function() {
                 endInput.min = startInput.value;
                 if (endInput.value && endInput.value < startInput.value) {
                     endInput.value = "";
