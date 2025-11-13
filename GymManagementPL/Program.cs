@@ -33,9 +33,18 @@ namespace GymManagementPL
             builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped<ISessionService, SessionService>();
             builder.Services.AddScoped<IAttachmentService, AttachmentService>();
-
             builder.Services.AddAutoMapper(x => x.AddProfile(new MappingProfiles()));
-            
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Config =>
+            {
+                Config.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<GymDbContext>();
+
+            //builder.Services.ConfigureApplicationCookie(opt =>
+            //{
+            //    opt.LoginPath = "/Account/Login";
+            //    opt.AccessDeniedPath = "/Account/AccessDenied";
+            //});
+
             var app = builder.Build();
 
             #region DataSeed

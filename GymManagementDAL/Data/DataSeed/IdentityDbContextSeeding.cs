@@ -31,7 +31,7 @@ namespace GymManagementDAL.Data.DataSeed
 
                     foreach (var role in roles)
                     {
-                        if (roleManager.RoleExistsAsync(role.Name!).Result)
+                        if (!roleManager.RoleExistsAsync(role.Name!).Result)
                         {
                             roleManager.CreateAsync(role).Wait();
                         }
@@ -61,8 +61,8 @@ namespace GymManagementDAL.Data.DataSeed
                         PhoneNumber = "01092814158"
                     };
 
-                    userManager.CreateAsync(mainAdmin, "P@ssw0rd").Wait();
-                    userManager.AddToRoleAsync(mainAdmin, "Admin").Wait();
+                    userManager.CreateAsync(admin, "P@ssw0rd").Wait();
+                    userManager.AddToRoleAsync(admin, "Admin").Wait();
 
                 }
                 return true;
