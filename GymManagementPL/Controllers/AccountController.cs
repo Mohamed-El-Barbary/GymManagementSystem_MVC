@@ -17,6 +17,8 @@ namespace GymManagementPL.Controllers
             _signInManager = signInManager;
         }
 
+        #region Login
+
         public IActionResult Login()
         {
             return View();
@@ -50,12 +52,27 @@ namespace GymManagementPL.Controllers
             return View(viewModel);
         }
 
+        #endregion
+
+        #region Logout
+
         [HttpPost]
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync().GetAwaiter().GetResult();
             return RedirectToAction(nameof(Login));
         }
+
+        #endregion
+
+        #region AccessDenied
+
+        public IActionResult AccessDenied()
+        {
+            return View();  
+        }
+
+        #endregion
 
     }
 }
