@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GymManagementBLL.ViewModels.AdminManamentViewModels;
 using GymManagementBLL.ViewModels.BookingViewModels;
 using GymManagementBLL.ViewModels.MembershipViewModels;
 using GymManagementBLL.ViewModels.MemberViewModels;
@@ -27,6 +28,7 @@ namespace GymManagementBLL
             ConfigureSessionMappings();
             ConfigureMembershipMappings();
             ConfigureBookingMappings();
+            ConfigureAdminMappings();
         }
 
         private void ConfigureMemberMappings()
@@ -193,8 +195,26 @@ namespace GymManagementBLL
             CreateMap<CreateBookingViewModel, Booking>()
                 .ForMember(dest => dest.IsAttended, opt => opt.MapFrom(src => false));
 
+        }
 
+        private void ConfigureAdminMappings()
+        {
+            // ApplicationUser => AdminListViewModel
+            CreateMap<ApplicationUser, AdminListViewModel>();
 
+            // CreateAdminViewModel => ApplicationUser
+            CreateMap<CreateAdminViewModel, ApplicationUser>();
+
+            // EditAdminViewModel => ApplicationUser
+            CreateMap<EditAdminViewModel, ApplicationUser>();
+
+            // ApplicationUser => EditAdminViewModel
+            CreateMap<ApplicationUser, EditAdminViewModel>();
+
+            // ApplicationUser => ManageRolesViewModel (جزئي)
+            CreateMap<ApplicationUser, ManageRolesViewModel>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
         }
 
     }
