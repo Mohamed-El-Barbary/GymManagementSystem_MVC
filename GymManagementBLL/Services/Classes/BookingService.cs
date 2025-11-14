@@ -64,7 +64,7 @@ namespace GymManagementBLL.Services.Classes
         #region GetMembersSession
         public IEnumerable<MemberForSessionViewModel> GetMembersSession(int sessionId)
         {
-            var membersForSession = _unitOfWork.SessionRepository.GetById(sessionId);
+            var membersForSession = _unitOfWork.BookingRepository.GetSessionById(sessionId);
 
             return _mapper.Map<IEnumerable<MemberForSessionViewModel>>(membersForSession);
         }
