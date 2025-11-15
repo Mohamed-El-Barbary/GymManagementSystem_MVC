@@ -1,5 +1,7 @@
 # GymManagementSystem 🏋️‍♂️
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 **GymManagementSystem** is a comprehensive **Gym Management System** designed for administrators to manage **Members, Trainers, Plans, Memberships, Sessions, and Schedules**.  
 This system focuses on **role-based access**, **membership management**, **session tracking**, and **trainer management**.
 
