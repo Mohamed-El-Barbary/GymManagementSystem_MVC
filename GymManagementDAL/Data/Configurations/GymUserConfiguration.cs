@@ -40,6 +40,9 @@ namespace GymManagementDAL.Data.Configurations
             builder.OwnsOne(x => x.Address, Address =>
             {
 
+                Address.Property(a => a.BuildingNumber)
+                       .HasColumnName("BuildingNumber");
+
                 Address.Property(a => a.Street)
                        .HasColumnName("Street")
                        .HasColumnType("varchar")

@@ -1,0 +1,80 @@
+﻿@model ManageRolesViewModel
+
+<div class="container mt-5">
+
+    <!-- Amazing Header -->
+    <div class="text-center mb-4">
+        <h1 class="fw-bold" style="letter-spacing:1px; color:#070093;">Manage Roles for @Model.Email</h1>
+        <p class="text-muted">Add or remove roles for this admin</p>
+        <hr class="w-50 mx-auto" style="border-top:3px solid #070093;" />
+    </div>
+
+    <!-- TempData Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row mt-4 g-4">
+
+        <!-- Current Roles -->
+        <div class="col-md-6">
+            <div class="card shadow-sm p-3">
+                <h4 class="fw-semibold mb-3">Current Roles</h4>
+                <ul class="list-group">
+                    @foreach (var role in Model.UserRoles)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            @role
+                            <form asp-action="RemoveRole" method="post" class="m-0">
+                                <input type="hidden" name="userId" value="@Model.UserId" />
+                                <input type="hidden" name="role" value="@role" />
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Add Roles -->
+        <div class="col-md-6">
+            <div class="card shadow-sm p-3">
+                <h4 class="fw-semibold mb-3">Add Role</h4>
+                <ul class="list-group">
+                    @foreach (var role in Model.AllRoles)
+                    {
+                        if (!Model.UserRoles.Contains(role))
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                @role
+                                <form asp-action="AddRole" method="post" class="m-0">
+                                    <input type="hidden" name="userId" value="@Model.UserId" />
+                                    <input type="hidden" name="role" value="@role" />
+                                    <button type="submit" class="btn btn-success btn-sm">Add</button>
+                                </form>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a asp-action="Index" class="btn btn-secondary px-4">Back</a>
+    </div>
+</div>
