@@ -70,7 +70,8 @@ This system focuses on **role-based access**, **membership management**, **sessi
 ## ⚙️ System Architecture
 
 - **Frontend:** HTML5, CSS3, Bootstrap 5, JavaScript  
-- **Backend:** ASP.NET MVC (.NET 7)  
+- **Backend:** ASP.NET Core MVC (.NET 9)  
+- **Authentication & Authorization:** ASP.NET Core Identity  
 - **Database:** SQL Server  
 - **ORM:** Entity Framework Core  
 - **Mapping:** AutoMapper  
