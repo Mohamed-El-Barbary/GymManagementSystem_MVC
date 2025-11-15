@@ -82,19 +82,36 @@
                                asp-controller="Booking" asp-action="Index">Sessions Schedule</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link px-3 py-2 fw-semibold fs-5 @(CurrentController == "AdminManagement" ? "active" : "")"
-                               asp-controller="AdminManagement" asp-action="Index">Admins Management</a>
-                        </li>
+                        @if (User.IsInRole("SuperAdmin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link px-3 py-2 fw-semibold fs-5 @(CurrentController == "AdminManagement" ? "active" : "")"
+                                   asp-controller="AdminManagement" asp-action="Index">Admins Management</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("SuperAdmin"))
+                        {
 
-                        <!-- Logout Icon -->
-                        <li class="nav-item ms-3">
-                            <form asp-action="Logout" asp-controller="Account" method="post" class="d-inline">
-                                <button type="submit" class="btn btn-link p-0 text-black">
-                                    <i class="bi bi-box-arrow-right fs-5"></i>
-                                </button>
-                            </form>
-                        </li>
+                            <!-- Logout Icon -->
+                            <li class="nav-item ms-3">
+                                <form asp-action="Logout" asp-controller="Account" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-link p-0 text-black">
+                                        <i class="bi bi-box-arrow-right fs-5"></i>
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <form asp-action="Logout" asp-controller="Account" method="post" class="d-inline">
+                                    <button type="submit"
+                                            class="btn btn-link nav-link px-3 py-2 mx-2 fw-bolder fs-5 text-black-alternative">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        }
 
                     </ul>
 

@@ -43,7 +43,8 @@ namespace GymManagementPL
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Config =>
             {
                 Config.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<GymDbContext>();
+            }).AddEntityFrameworkStores<GymDbContext>()
+            .AddDefaultTokenProviders(); ;
 
             //builder.Services.ConfigureApplicationCookie(opt =>
             //{

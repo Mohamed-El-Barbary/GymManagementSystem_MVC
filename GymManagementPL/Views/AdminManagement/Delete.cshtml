@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Delete Admin";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <!-- Card -->
+            <div class="card p-5 shadow" style="border-radius:15px;">
+
+                <!-- Header -->
+                <h2 class="text-center fw-bold mb-4" style="color:#070093; letter-spacing:1px;">
+                    Delete Admin
+                </h2>
+
+                <p class="fs-5 text-center mb-4">Are you sure you want to delete this Admin?</p>
+
+                <!-- Warning Alert -->
+                <div class="alert alert-warning text-start" role="alert">
+                    <strong>Warning!</strong> This action cannot be undone. All Admin data will be permanently deleted.
+                </div>
+
+                <!-- Form -->
+                <form method="post" asp-action="DeleteConfirmed" class="mt-4">
+                    <input type="hidden" readonly name="id" value="@ViewBag.AdminId" />
+
+                    <div class="d-flex gap-3">
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary flex-fill fw-semibold">
+                            NO
+                        </a>
+                        <button type="submit"
+                                class="btn flex-fill fw-semibold text-white"
+                                style="background:#070093; border-color:#070093;">
+                            YES
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

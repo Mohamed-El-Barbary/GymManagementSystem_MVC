@@ -1,4 +1,5 @@
-﻿using GymManagementBLL.Services.Interfaces;
+﻿using GymManagementBLL.Services.Classes;
+using GymManagementBLL.Services.Interfaces;
 using GymManagementBLL.ViewModels.AdminManamentViewModels;
 using GymManagementDAL.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -51,18 +52,14 @@ namespace GymManagementPL.Controllers
 
         public IActionResult Edit(string id)
         {
-            var user = _adminService.GetAllAdmins().FirstOrDefault(u => u.Id == id);
-            if (user == null) return NotFound();
+            var model = _adminService.GetAdminForUpdate(id);
 
-            var model = new EditAdminViewModel
-            {
-                Id = user.Id,
-                Email = user.Email,
-                UserName = user.UserName
-            };
+            if (model == null)
+                return NotFound();
 
             return View(model);
         }
+
 
         [HttpPost]
         public IActionResult Edit(EditAdminViewModel model)
@@ -80,7 +77,15 @@ namespace GymManagementPL.Controllers
             return View(model);
         }
 
+
         public IActionResult Delete(string id)
+        {
+            ViewBag.AdminId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(string id)
         {
             var result = _adminService.DeleteAdmin(id);
 

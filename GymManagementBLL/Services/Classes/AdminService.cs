@@ -50,9 +50,26 @@ namespace GymManagementBLL.Services.Classes
             return result;
         }
 
+
+
         // =========================
         // Edit Admin
         // =========================
+
+        public EditAdminViewModel GetAdminForUpdate(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return null!;
+
+            var user = _userManager.FindByIdAsync(id).Result;
+
+            if (user == null)
+                return null!;
+
+            return _mapper.Map<EditAdminViewModel>(user);
+        }
+
+
         public IdentityResult EditAdmin(EditAdminViewModel model)
         {
             var user = _userManager.FindByIdAsync(model.Id).Result;

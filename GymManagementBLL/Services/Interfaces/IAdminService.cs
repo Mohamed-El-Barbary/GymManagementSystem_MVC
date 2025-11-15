@@ -13,6 +13,7 @@ namespace GymManagementBLL.Services.Interfaces
     {
         IEnumerable<AdminListViewModel> GetAllAdmins();
         IdentityResult CreateAdmin(CreateAdminViewModel model);
+        EditAdminViewModel GetAdminForUpdate(string id);
         IdentityResult EditAdmin(EditAdminViewModel model);
         IdentityResult DeleteAdmin(string id);
         IdentityResult ResetPassword(ResetPasswordViewModel model);
