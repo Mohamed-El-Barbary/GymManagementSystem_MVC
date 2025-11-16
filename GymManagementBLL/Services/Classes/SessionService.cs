@@ -48,7 +48,7 @@ namespace GymManagementBLL.Services.Classes
                 var mappedSession = _mapper.Map<Session>(createdSession);
 
                 _unitOfWork.GetRepository<Session>().Add(mappedSession);
-                mappedSession.CreatedAt = DateTime.Now;
+                mappedSession.CreatedAt = DateTime.UtcNow;
                 return _unitOfWork.SaveChanges() > 0;
 
             }
@@ -166,6 +166,8 @@ namespace GymManagementBLL.Services.Classes
 
         #endregion
 
+        #region GetDataForDropDown 
+
         public IEnumerable<TrainerSelectViewModel> GetTrainersForDropDown()
         {
             var trainers = _unitOfWork.GetRepository<Trainer>().GetAll();
@@ -179,6 +181,7 @@ namespace GymManagementBLL.Services.Classes
             return _mapper.Map<IEnumerable<CategorySelectViewModel>>(Categories);
         }
 
+        #endregion
 
         #region Helper Method
 
@@ -194,21 +197,21 @@ namespace GymManagementBLL.Services.Classes
 
         private bool IsValidDateRange(DateTime startDate, DateTime EndDate)
         {
-            return EndDate > startDate && EndDate > DateTime.Now;
+            return EndDate > startDate && EndDate > DateTime.UtcNow;
         }
 
         private bool IsSessionValidToUpdate(Session session)
         {
             return session != null &&
-                   session.EndDate >= DateTime.Now &&
-                   session.StartDate > DateTime.Now &&
+                   session.EndDate >= DateTime.UtcNow &&
+                   session.StartDate > DateTime.UtcNow &&
                    _unitOfWork.SessionRepository.GetCountOfBooksSlots(session.Id) == 0;
         }
 
         private bool IsSessionValidToRemove(Session session)
         {
             return session != null &&
-            session.EndDate <= DateTime.Now &&
+            session.EndDate <= DateTime.UtcNow &&
             _unitOfWork.SessionRepository.GetCountOfBooksSlots(session.Id) == 0;
         }
 
